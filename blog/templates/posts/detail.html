@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="posts">
+          <section class="post">
+            <header class="post-header">
+                <img class="post-avatar" alt="author avatar" height="48" width="48" src="img/common/ericf-avatar.png">
+
+                <h2 class="post-detail-title">{{ post.title }}</h2>
+
+                <p class="post-meta">
+                    By <a class="post-author" href="#">Eric Ferraiuolo</a> at <strong>{{ post.created_at.strftime('%Y-%m-%d') }}</strong> under <a class="post-category post-category-3" href="#">JavaScript</a>
+
+                    {% with total=post.comments|length %}
+                        <a href="#disqus_thread"><i class="fa fa-comment"></i> {{ total }} comment {% if total > 1 %}s{% endif %}</a>
+                    {% endwith %}
+                </p>
+            </header>
+
+            <div class="post-description">
+                <p>
+                    {{ post.content|truncate(100)|markdown }}
+                </p>
+            </div>
+        </section>
+
+        <hr>
+    </div>
+{% endblock %}
+
+{% block footer %}
+ <div class="footer">
+    <div class="comments">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = {{ request.path }};
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://syndbg.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+</div>
+{% endblock footer %}

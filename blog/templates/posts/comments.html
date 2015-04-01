@@ -1,0 +1,5 @@
+{% for comment in post.comments %}
+  <p>{{ comment.content }}</p>
+  <p><strong>{{ comment.author }}</strong> <small>on {{ comment.created_at.strftime('%H:%M %Y-%m-%d') }}</small></p>
+  <p>{{ comment.text }}</p>
+{% endfor %}
